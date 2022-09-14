@@ -1,5 +1,10 @@
 import app from './app.js';
 
+import Home from '../controllers/Home.js';
+import Login from '../controllers/Login.js';
+import Search from '../controllers/Search.js';
+import About from '../controllers/About.js';
+
 import config from './config.js';
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,22 +13,21 @@ import config from './config.js';
 
 function initializeRouter() {
     // Instancier ici le Vanilla Router dans l'objet "app.mvc.router"
-    const router = new Router({
+    // ...
+    app.mvc.router = new Router({
         mode: 'hash',
         page404: function(path) {
             console.log('"/' + path + '" Page not found');
         }
     });
-
-    router.add('', function() {
-        console.log('Home page');
-    });
-
-    router.addUriListener();
-    router.navigateTo('/').check();
-
-    // ...
+    app.mvc.router.add('', () => app.mvc.dispatchRoute(new Home()));
+    app.mvc.router.add('login', () => app.mvc.dispatchRoute(new Login()));
+    app.mvc.router.add('about', () => app.mvc.dispatchRoute(new About()));
+    app.mvc.router.add('search', () => app.mvc.dispatchRoute(new Search()));
+    app.mvc.router.addUriListener();
+    app.mvc.router.navigateTo('/').check();
 }
+
 
 
 // --------------------------------------------------------------------------------------------------------------------
