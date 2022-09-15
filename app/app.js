@@ -6,14 +6,15 @@ let app = {
         render: (content) => {
             document.querySelector('main.container').innerHTML = content;
         },
-        renderEvents(records) {
+        renderEvents: (records) => {
             // Provisoire devra être déplacé dans app.dom
             let template = document.querySelector("#event-template");
             document.querySelector('.event-list.row').innerHTML = '';
             for (const record of records) {
                 let clone = document.importNode(template.content, true);
-                clone.querySelector('h6.event-title').textContent = record.fields.title
-                clone.querySelector('img.event-image').src = record.fields.cover_url
+                clone.querySelector('h6.event-title').textContent = record.name;
+                clone.querySelector('img.event-image').src = record.image.url;
+                clone.querySelector('img.event-image').alt = record.image.alt;
                 document.querySelector('.event-list.row').appendChild(clone)
             }
         }

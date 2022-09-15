@@ -37,4 +37,10 @@ function initializeRouter() {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialisation du routeur.
     initializeRouter();
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config.firebase);
+    }
+
 });
