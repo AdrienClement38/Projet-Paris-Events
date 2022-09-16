@@ -6,10 +6,11 @@ let app = {
         render: (content) => {
             document.querySelector('main.container').innerHTML = content;
         },
-        renderEvents: (records) => {
+        renderEvents: (records, firstPage) => {
             // Provisoire devra être déplacé dans app.dom
             let template = document.querySelector("#event-template");
-            document.querySelector('.event-list.row').innerHTML = '';
+            if (firstPage) document.querySelector('.event-list.row').innerHTML = '';
+
             for (const record of records) {
                 let clone = document.importNode(template.content, true);
                 clone.querySelector('h6.event-title').textContent = record.name;
